@@ -1,39 +1,40 @@
-# Miso 🍜
+# Koiyo 🎏
 
-Miso is a tasty TypeScript framework for building agentic applications.
+Koiyo is a minimal TypeScript framework for building AI agents.
 
 ## Installation
 
 ```bash
 # Using Bun (recommended)
-bun add miso
+bun add @koiyo/core @koiyo/models
 
 # Using npm
-npm install miso
+npm install @koiyo/core @koiyo/models
 
 # Using pnpm
-pnpm add miso
+pnpm add @koiyo/core @koiyo/models
 
 # Using yarn
-yarn add miso
+yarn add @koiyo/core @koiyo/models
 ```
 
 ## Quick Start
 
+
 ```typescript
-import { agent, worker } from "miso";
-import { openai } from "miso/models";
+import { Agent, Worker } from "@koiyo/core";
+import { openai } from "@koiyo/models";
 
-const planner = worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Create a brief plan.");
+const app = new Agent([
+	new Worker()
+		.model(openai("gpt-4o-mini"))
+		.instructions("Create a brief plan."),
+	new Worker()
+		.model(openai("gpt-4o-mini"))
+		.instructions("Execute the plan. Keep responses brief.")
+]);
 
-const executor = worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Execute the plan. Keep responses brief.");
-
-const app = agent(planner, executor);
-
-const response = await app("Say hello in one sentence.");
-console.log(response);
+console.log(
+	await app.generate("Say hello in one sentence.")
+);
 ```

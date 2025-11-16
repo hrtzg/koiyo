@@ -1,31 +1,35 @@
 {
-	"name": "miso",
-	"version": "1.0.0",
-	"description": "A tasty AI framework for building agentic applications 🍜",
-	"type": "module",
-	"module": "src/index.ts",
-	"exports": {
-		".": "./src/index.ts"
-	},
-	"keywords": [
-		"ai",
-		"framework",
-		"agent",
-		"llm"
-	],
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/miso/miso.git"
-	},
-	"scripts": {
-		"streaming": "bun run examples/streamingExample.ts",
-		"default": "bun run examples/defaultExample.ts"
-	},
-	"devDependencies": {
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
-	}
+  "name": "koiyo",
+  "version": "1.0.0",
+  "description": "A minimal TypeScript framework for building AI agents 🎏",
+  "type": "module",
+  "module": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "keywords": [
+    "ai",
+    "framework",
+    "agent",
+    "llm"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koiyo/koiyo.git"
+  },
+  "scripts": {
+    "streaming": "bun run examples/streamingExample.ts",
+    "default": "bun run examples/defaultExample.ts",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vitepress": "^2.0.0-alpha.13"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
 }
