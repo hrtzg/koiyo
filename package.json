@@ -19,7 +19,8 @@
 		"url": "https://github.com/miso/miso.git"
 	},
 	"scripts": {
-		"test": "bun run examples/basic-usage.ts"
+		"streaming": "bun run examples/streamingExample.ts",
+		"default": "bun run examples/defaultExample.ts"
 	},
 	"devDependencies": {
 		"@types/bun": "latest"
