@@ -4,7 +4,7 @@ import { openai } from "../src/models";
 // Create workers
 const planner = worker()
 	.model(openai("gpt-4o-mini"))
-	.context("Create a brief plan.");
+	.context("Create a brief plan for the executor to fulfill the request.");
 
 const executor = worker()
 	.model(openai("gpt-4o-mini"))
@@ -14,7 +14,7 @@ const executor = worker()
 const app = agent(planner, executor);
 
 // Use agent
-const streamResponse = await app("Instruct the executor to say nothing but the word hello.", {
+const streamResponse = await app("Say the word hello 10x.", {
 	stream: true,
 });
 
