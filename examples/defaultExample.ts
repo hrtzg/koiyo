@@ -3,11 +3,11 @@ import { openai } from "../src/models";
 
 // Create workers
 const planner = worker()
-	.use(openai("gpt-4o-mini"))
+	.model(openai("gpt-4o-mini"))
 	.context("Create a brief plan.");
 
 const executor = worker()
-	.use(openai("gpt-4o-mini"))
+	.model(openai("gpt-4o-mini"))
 	.context("Execute the plan. Keep responses brief.");
 
 // Create agent

@@ -12,8 +12,8 @@ export function isWorker(value: unknown): value is Worker {
 		typeof value === "object" &&
 		"process" in value &&
 		typeof (value as Worker).process === "function" &&
-		"use" in value &&
-		typeof (value as Worker).use === "function"
+		"model" in value &&
+		typeof (value as Worker).model === "function"
 	);
 }
 

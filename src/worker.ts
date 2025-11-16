@@ -15,7 +15,7 @@ export interface WorkerProcessOptions {
  * Worker class that processes inputs through an AI model
  */
 class Worker<I = unknown, O = unknown> {
-	private model?: ModelAdapter;
+	private modelAdapter?: ModelAdapter;
 	private workerContext?: string;
 
 	/**
@@ -23,10 +23,10 @@ class Worker<I = unknown, O = unknown> {
 	 * @param modelFactory - A function that returns a ModelAdapter instance
 	 * @throws {Error} If the model factory returns null or undefined
 	 */
-	use(modelFactory: () => ModelAdapter): this {
+	model(modelFactory: () => ModelAdapter): this {
 		const model = modelFactory();
 		assertModelAdapter(model, "Model factory result");
-		this.model = model;
+		this.modelAdapter = model;
 		return this;
 	}
 
@@ -52,7 +52,7 @@ class Worker<I = unknown, O = unknown> {
 		input: I,
 		options?: WorkerProcessOptions
 	): Promise<O | AsyncIterable<string>> {
-		assertModelAdapter(this.model, "Worker model");
+		assertModelAdapter(this.modelAdapter, "Worker model");
 		assertDefined(input, "Worker input");
 
 		// Convert input to string prompt
@@ -69,7 +69,7 @@ class Worker<I = unknown, O = unknown> {
 		}
 
 		// Generate response from model
-		const result = await this.model.generate(
+		const result = await this.modelAdapter.generate(
 			prompt,
 			this.workerContext,
 			generateOptions
