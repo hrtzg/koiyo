@@ -1,11 +1,30 @@
 {
-  "name": "miso",
-  "module": "src/index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+	"name": "miso",
+	"version": "1.0.0",
+	"description": "A tasty AI framework for building agentic applications 🍜",
+	"type": "module",
+	"module": "src/index.ts",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"keywords": [
+		"ai",
+		"framework",
+		"agent",
+		"llm"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miso/miso.git"
+	},
+	"scripts": {
+		"test": "bun run examples/basic-usage.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }
