@@ -1,6 +1,6 @@
 # Miso 🍜
 
-Miso is a tasty typescript framework for building agentic applications.
+Miso is a tasty TypeScript framework for building agentic applications.
 
 ## Installation
 
@@ -24,7 +24,6 @@ yarn add miso
 import { agent, worker } from "miso";
 import { openai } from "miso/models";
 
-// Create workers with specific roles
 const planner = worker()
 	.use(openai("gpt-4o-mini"))
 	.context("Create a brief plan.");
@@ -33,10 +32,8 @@ const executor = worker()
 	.use(openai("gpt-4o-mini"))
 	.context("Execute the plan. Keep responses brief.");
 
-// Chain workers together into an agent
 const app = agent(planner, executor);
 
-// Use the agent
 const response = await app("Say hello in one sentence.");
 console.log(response);
 ```
