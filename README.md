@@ -26,11 +26,11 @@ import { openai } from "miso/models";
 
 const planner = worker()
 	.model(openai("gpt-4o-mini"))
-	.context("Create a brief plan.");
+	.instructions("Create a brief plan.");
 
 const executor = worker()
 	.model(openai("gpt-4o-mini"))
-	.context("Execute the plan. Keep responses brief.");
+	.instructions("Execute the plan. Keep responses brief.");
 
 const app = agent(planner, executor);
 
