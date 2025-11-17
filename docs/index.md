@@ -4,8 +4,7 @@ layout: home
 
 hero:
     name: 'Koiyo 🎏'
-    text: 'AI Agent Framework'
-    tagline: Build powerful, composable AI agents with a clean, type-safe API
+    tagline: The framework for building typesafe AI agents
     actions:
         - theme: brand
           text: Get Started

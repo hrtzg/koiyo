@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
 	title: 'Koiyo',
 	description: 'Minimal TypeScript framework for building AI agents 🎏',
+	cleanUrls: true,
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
@@ -30,17 +31,30 @@ export default defineConfig({
 				],
 			},
 			{
-				text: 'Guides',
-				items: [{ text: 'Models', link: '/models' }],
-			},
-			{
 				text: 'Examples',
 				items: [{ text: 'Code Examples', link: '/api-examples' }],
+			},
+			{
+				text: 'References',
+				items: [
+					{
+						text: '@koiyo/core',
+						link: 'https://npmjs.com/package/@koiyo/core',
+					},
+				],
 			},
 		],
 
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/koiyo/koiyo' },
+			{
+				icon: 'npm',
+				link: 'https://www.npmjs.com/org/koiyo',
+			},
+			{ icon: 'github', link: 'https://github.com/hrtzg/koiyo' },
 		],
+
+		search: {
+			provider: 'local',
+		},
 	},
 });
