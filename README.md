@@ -1,5 +1,8 @@
 # Koiyo 🎏
 
+> [!CAUTION]
+> Koiyo is in very early development. Do not use this for production.
+
 Koiyo is a minimal TypeScript framework for building AI agents.
 
 ## Installation
@@ -19,7 +22,6 @@ yarn add @koiyo/core @koiyo/models
 ```
 
 ## Quick Start
-
 
 ```typescript
 import { Agent, Worker } from "@koiyo/core";
