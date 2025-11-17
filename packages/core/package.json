@@ -1,0 +1,41 @@
+{
+	"name": "@koiyo/core",
+	"version": "0.1.0",
+	"description": "Minimal AI agent framework 🎏",
+	"homepage": "https://github.com/hrtzg/koiyo/tree/main/packages/core#readme",
+	"license": "MIT",
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hrtzg/koiyo.git"
+	},
+	"scripts": {
+		"type-check": "tsc --noEmit"
+	},
+	"peerDependencies": {
+		"typescript": ">=5.9.3"
+	},
+	"peerDependenciesMeta": {
+		"typescript": {
+			"optional": true
+		}
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"@ai-sdk/provider": "^2.0.0",
+		"@ai-sdk/provider-utils": "^3.0.17"
+	}
+}

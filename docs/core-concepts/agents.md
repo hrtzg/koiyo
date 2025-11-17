@@ -9,16 +9,16 @@ An **Agent** orchestrates multiple workers to process tasks sequentially. Each w
 ## Creating an Agent
 
 ```typescript
-import { Agent, Worker } from "@koiyo/core";
-import { openai } from "@koiyo/models";
+import { Agent, Worker } from '@koiyo/core';
+import { openai } from '@ai-sdk/openai';
 
 const planner = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Create a brief plan.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('Create a brief plan.');
 
 const executor = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Execute the plan. Keep responses brief.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('Execute the plan. Keep responses brief.');
 
 const agent = new Agent([planner, executor]);
 ```
@@ -40,10 +40,10 @@ Each worker receives enhanced context that includes:
 
 ## Using an Agent
 
-You can use an agent directly:
+You can use an agent with the `generate` method:
 
 ```typescript
-const response = await agent("Say hello in one sentence.");
+const response = await agent.generate('Say hello in one sentence.');
 console.log(response);
 ```
 
@@ -53,7 +53,10 @@ Or with options:
 
 ```typescript [Streaming]
 // With streaming
-const stream = await agent("Say hello in one sentence.", { stream: true });
+const stream = await agent.generate('Say hello in one sentence.', {
+	stream: true,
+});
+
 for await (const chunk of stream) {
 	process.stdout.write(chunk);
 }
@@ -61,15 +64,7 @@ for await (const chunk of stream) {
 
 ```typescript [Max Tokens]
 // With max tokens
-const response = await agent("Say hello in one sentence.", {
-	maxTokens: 100,
-});
-```
-
-```typescript [Both Options]
-// Combine both options
-const stream = await agent("Say hello in one sentence.", {
-	stream: true,
+const response = await agent.generate('Say hello in one sentence.', {
 	maxTokens: 100,
 });
 ```

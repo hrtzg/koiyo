@@ -9,13 +9,13 @@ A **Conversation** manages stateful interactions with an agent. It maintains con
 ## Creating a Conversation
 
 ```typescript
-import { Conversation, Agent, Worker } from "@koiyo/core";
-import { openai } from "@koiyo/models";
+import { Conversation, Agent, Worker } from '@koiyo/core';
+import { openai } from '@ai-sdk/openai';
 
 const agent = new Agent([
 	new Worker()
-		.model(openai("gpt-4o-mini"))
-		.instructions("You are a helpful assistant."),
+		.model(openai('gpt-4o-mini'))
+		.instructions('You are a helpful assistant.'),
 ]);
 
 const conversation = new Conversation(agent, {
@@ -33,10 +33,10 @@ Maintain custom state across the conversation:
 ```typescript
 const conversation = new Conversation(agent, {
 	state: {
-		userName: "Alice",
+		userName: 'Alice',
 		preferences: {
-			language: "en",
-			tone: "friendly",
+			language: 'en',
+			tone: 'friendly',
 		},
 	},
 	stream: true,
@@ -55,7 +55,7 @@ For semantic search and context retrieval, you can use a memory adapter (vector 
 
 ```typescript{67-76}
 import { Conversation, Agent, Worker } from "@koiyo/core";
-import { openai } from "@koiyo/models";
+import { openai } from "@ai-sdk/openai";
 import { chroma } from "@koiyo/memory";
 
 const agent = new Agent([
@@ -79,9 +79,9 @@ const conversation = new Conversation(agent, {
 Koiyo supports multiple vector database adapters for memory. Import the one you need:
 
 ```typescript
-import { chroma } from "@koiyo/memory"; // ChromaDB
-import { pinecone } from "@koiyo/memory"; // Pinecone
-import { qdrant } from "@koiyo/memory"; // Qdrant
+import { chroma } from '@koiyo/memory'; // ChromaDB
+import { pinecone } from '@koiyo/memory'; // Pinecone
+import { qdrant } from '@koiyo/memory'; // Qdrant
 // More coming soon...
 ```
 
@@ -103,14 +103,14 @@ The memory adapter handles storing and retrieving conversation context using vec
 For storing conversation results and data, you can use a persistence adapter (traditional database or cache):
 
 ```typescript
-import { Conversation, Agent, Worker } from "@koiyo/core";
-import { openai } from "@koiyo/models";
-import { redis } from "@koiyo/persistence";
+import { Conversation, Agent, Worker } from '@koiyo/core';
+import { openai } from '@ai-sdk/openai';
+import { redis } from '@koiyo/persistence';
 
 const agent = new Agent([
 	new Worker()
-		.model(openai("gpt-4o-mini"))
-		.instructions("You are a helpful assistant."),
+		.model(openai('gpt-4o-mini'))
+		.instructions('You are a helpful assistant.'),
 ]);
 
 // Create conversation with persistence for storing results
@@ -118,7 +118,7 @@ const conversation = new Conversation(agent, {
 	state: {},
 	stream: true,
 	persistence: redis({
-		url: process.env.REDIS_URL || "redis://localhost:6379",
+		url: process.env.REDIS_URL || 'redis://localhost:6379',
 		password: process.env.REDIS_PASSWORD,
 	}),
 });
@@ -128,9 +128,9 @@ const conversation = new Conversation(agent, {
 Koiyo supports multiple persistence adapters. Import the one you need:
 
 ```typescript
-import { local } from "@koiyo/persistence"; // Local file-based storage
-import { redis } from "@koiyo/persistence"; // Redis
-import { postgres } from "@koiyo/persistence"; // PostgreSQL
+import { local } from '@koiyo/persistence'; // Local file-based storage
+import { redis } from '@koiyo/persistence'; // Redis
+import { postgres } from '@koiyo/persistence'; // PostgreSQL
 // More coming soon...
 ```
 
@@ -163,14 +163,14 @@ const conversation = new Conversation(agent, {
 ### Basic Usage
 
 ```typescript
-const response = await conversation.send("Hello!");
+const response = await conversation.send('Hello!');
 console.log(response);
 ```
 
 ### With Streaming
 
 ```typescript
-const stream = await conversation.send("Tell me a story");
+const stream = await conversation.send('Tell me a story');
 
 for await (const chunk of stream) {
 	process.stdout.write(chunk);
@@ -180,7 +180,7 @@ for await (const chunk of stream) {
 ### With Options
 
 ```typescript
-const response = await conversation.send("Hello!", {
+const response = await conversation.send('Hello!', {
 	maxTokens: 100,
 });
 ```
@@ -209,25 +209,25 @@ Listen to conversation events to react to messages being sent and received:
 
 ```typescript
 // Listen for messages being sent
-conversation.on("message:sent", (message) => {
-	console.log("User sent:", message.content);
+conversation.on('message:sent', message => {
+	console.log('User sent:', message.content);
 });
 
 // Listen for messages being received
-conversation.on("message:received", (message) => {
-	console.log("Assistant replied:", message.content);
+conversation.on('message:received', message => {
+	console.log('Assistant replied:', message.content);
 });
 
 // Listen for all message events
-conversation.on("message", (event) => {
-	console.log("Message event:", event.type, event.message);
+conversation.on('message', event => {
+	console.log('Message event:', event.type, event.message);
 });
 
 // Remove a listener
-conversation.off("message:sent", handler);
+conversation.off('message:sent', handler);
 
 // Remove all listeners for an event
-conversation.off("message:sent");
+conversation.off('message:sent');
 ```
 
 ### Available Events
@@ -248,8 +248,8 @@ Access and update state:
 // State is available in tool execution contexts
 const stateTool = new Tool()
 	.meta({
-		name: "Update State",
-		description: "Updates conversation state",
+		name: 'Update State',
+		description: 'Updates conversation state',
 	})
 	.input(
 		z.object({
@@ -278,8 +278,8 @@ const stateTool = new Tool()
 ```typescript
 const chatAgent = new Agent([
 	new Worker()
-		.model(openai("gpt-4o-mini"))
-		.instructions("You are a friendly chat assistant."),
+		.model(openai('gpt-4o-mini'))
+		.instructions('You are a friendly chat assistant.'),
 ]);
 
 const chat = new Conversation(chatAgent, {
@@ -293,7 +293,7 @@ const chat = new Conversation(chatAgent, {
 await chat.send("Hi, I'm Alice!");
 
 // Follow-up message (maintains context)
-await chat.send("What did I just say my name was?");
+await chat.send('What did I just say my name was?');
 ```
 
 ## Best Practices

@@ -11,19 +11,19 @@ Koiyo is a TypeScript framework for building AI agents. This guide will help you
 ::: code-group
 
 ```sh [bun]
-$ bun add @koiyo/core @koiyo/models
+$ bun add @koiyo/core
 ```
 
 ```sh [pnpm]
-$ pnpm add @koiyo/core @koiyo/models
+$ pnpm add @koiyo/core
 ```
 
 ```sh [npm]
-$ npm install @koiyo/core @koiyo/models
+$ npm install @koiyo/core
 ```
 
 ```sh [yarn]
-$ yarn add @koiyo/core @koiyo/models
+$ yarn add @koiyo/core
 ```
 
 :::
@@ -42,20 +42,20 @@ Koiyo is built around four core components:
 Here's a practical example that demonstrates all the core concepts working together:
 
 ```typescript
-import { Agent, Worker, Tool, Conversation } from "@koiyo/core";
-import { openai } from "@koiyo/models";
-import { z } from "zod"; // Any Standard Schema-compatible library works!
+import { Agent, Worker, Tool, Conversation } from '@koiyo/core';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod'; // Any Standard Schema-compatible library works!
 
 // Step 1: Create a tool that extends worker capabilities
 const calculatorTool = new Tool()
 	.meta({
-		name: "Calculator",
+		name: 'Calculator',
 		description:
-			"Performs basic math operations (add, subtract, multiply, divide)",
+			'Performs basic math operations (add, subtract, multiply, divide)',
 	})
 	.input(
 		z.object({
-			operation: z.enum(["add", "subtract", "multiply", "divide"]),
+			operation: z.enum(['add', 'subtract', 'multiply', 'divide']),
 			a: z.number(),
 			b: z.number(),
 		})
@@ -64,32 +64,32 @@ const calculatorTool = new Tool()
 	.execute(({ input }) => {
 		const { operation, a, b } = input;
 		switch (operation) {
-			case "add":
+			case 'add':
 				return a + b;
-			case "subtract":
+			case 'subtract':
 				return a - b;
-			case "multiply":
+			case 'multiply':
 				return a * b;
-			case "divide":
-				return b !== 0 ? a / b : "Error: Division by zero";
+			case 'divide':
+				return b !== 0 ? a / b : 'Error: Division by zero';
 		}
 	});
 
 // Step 2: Create specialized workers
 // The planner analyzes the request and creates a step-by-step plan
 const planner = new Worker()
-	.model(openai("gpt-4o-mini"))
+	.model(openai('gpt-4o-mini'))
 	.instructions(
 		"Analyze the user's request and create a clear, step-by-step plan. " +
-			"Break down complex tasks into smaller, actionable steps."
+			'Break down complex tasks into smaller, actionable steps.'
 	);
 
 // The executor follows the plan and uses tools when needed
 const executor = new Worker()
-	.model(openai("gpt-4o-mini"))
+	.model(openai('gpt-4o-mini'))
 	.instructions(
-		"Execute the plan step by step. Use available tools when calculations " +
-			"or specific operations are needed. Provide clear, concise responses."
+		'Execute the plan step by step. Use available tools when calculations ' +
+			'or specific operations are needed. Provide clear, concise responses.'
 	)
 	.tools([calculatorTool]);
 
@@ -99,7 +99,7 @@ const agent = new Agent([planner, executor]);
 // Step 4: Create a conversation with state management
 const conversation = new Conversation(agent, {
 	state: {
-		userName: "Alice",
+		userName: 'Alice',
 		interactionCount: 0,
 	},
 	stream: true,
@@ -113,15 +113,15 @@ const conversation = new Conversation(agent, {
 async function main() {
 	// First interaction
 	const response1 = await conversation.send(
-		"Calculate 15 * 23 and then add 100 to the result"
+		'Calculate 15 * 23 and then add 100 to the result'
 	);
-	console.log("Response:", response1);
+	console.log('Response:', response1);
 
 	// The conversation maintains state across interactions
 	const response2 = await conversation.send(
-		"What was the final result from my previous calculation?"
+		'What was the final result from my previous calculation?'
 	);
-	console.log("Follow-up:", response2);
+	console.log('Follow-up:', response2);
 }
 
 main();

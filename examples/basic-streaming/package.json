@@ -1,0 +1,19 @@
+{
+	"name": "basic-streaming",
+	"module": "src/index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"start": "bun run src/index.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"dependencies": {
+		"@ai-sdk/openai": "^2.0.67",
+		"@koiyo/core": "workspace:*"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
+}

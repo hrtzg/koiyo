@@ -9,12 +9,12 @@ A **Worker** is a single processing unit that uses a language model to perform a
 ## Creating a Worker
 
 ```typescript
-import { Worker } from "@koiyo/core";
-import { openai } from "@koiyo/models";
+import { Worker } from '@koiyo/core';
+import { openai } from '@ai-sdk/openai';
 
 const worker = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("You are a helpful assistant.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('You are a helpful assistant.');
 ```
 
 ## Configuration
@@ -39,9 +39,9 @@ Provide context and instructions for the worker:
 
 ```typescript
 const worker = new Worker()
-	.model(openai("gpt-4o-mini"))
+	.model(openai('gpt-4o-mini'))
 	.instructions(
-		"You are a code reviewer. Review the code and provide feedback."
+		'You are a code reviewer. Review the code and provide feedback.'
 	);
 ```
 
@@ -61,8 +61,8 @@ Attach tools to extend the worker's capabilities:
 
 ```typescript
 const worker = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Execute the plan. Keep responses brief.")
+	.model(openai('gpt-4o-mini'))
+	.instructions('Execute the plan. Keep responses brief.')
 	.tools([greetingTool, calculatorTool]);
 ```
 
@@ -83,16 +83,16 @@ This context helps workers understand their role in the larger agent workflow.
 
 ```typescript
 const researcher = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Research the topic and provide key facts.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('Research the topic and provide key facts.');
 
 const writer = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Write a clear, concise summary based on the research.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('Write a clear, concise summary based on the research.');
 
 const editor = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Review and improve the writing for clarity and style.");
+	.model(openai('gpt-4o-mini'))
+	.instructions('Review and improve the writing for clarity and style.');
 
 const agent = new Agent([researcher, writer, editor]);
 ```

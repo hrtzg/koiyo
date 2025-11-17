@@ -9,13 +9,13 @@ outline: deep
 ## Creating a Tool
 
 ```typescript
-import { Tool } from "@koiyo/core";
-import { z } from "zod";
+import { Tool } from '@koiyo/core';
+import { z } from 'zod';
 
 const greetingTool = new Tool()
 	.meta({
-		name: "Greeting Tool",
-		description: "Used to greet people by their name",
+		name: 'Greeting Tool',
+		description: 'Used to greet people by their name',
 	})
 	.input(z.string())
 	.output(z.string())
@@ -98,17 +98,17 @@ The execute function receives:
 ## Example: Calculator Tool
 
 ```typescript
-import { Tool } from "@koiyo/core";
-import { z } from "zod";
+import { Tool } from '@koiyo/core';
+import { z } from 'zod';
 
 const calculatorTool = new Tool()
 	.meta({
-		name: "Calculator",
-		description: "Performs basic arithmetic operations",
+		name: 'Calculator',
+		description: 'Performs basic arithmetic operations',
 	})
 	.input(
 		z.object({
-			operation: z.enum(["add", "subtract", "multiply", "divide"]),
+			operation: z.enum(['add', 'subtract', 'multiply', 'divide']),
 			a: z.number(),
 			b: z.number(),
 		})
@@ -117,14 +117,14 @@ const calculatorTool = new Tool()
 	.execute(({ input }) => {
 		const { operation, a, b } = input;
 		switch (operation) {
-			case "add":
+			case 'add':
 				return a + b;
-			case "subtract":
+			case 'subtract':
 				return a - b;
-			case "multiply":
+			case 'multiply':
 				return a * b;
-			case "divide":
-				return b !== 0 ? a / b : "Cannot divide by zero";
+			case 'divide':
+				return b !== 0 ? a / b : 'Cannot divide by zero';
 		}
 	});
 ```
@@ -134,8 +134,8 @@ const calculatorTool = new Tool()
 ```typescript
 const weatherTool = new Tool()
 	.meta({
-		name: "Weather",
-		description: "Gets the current weather for a location",
+		name: 'Weather',
+		description: 'Gets the current weather for a location',
 	})
 	.input(
 		z.object({
@@ -165,8 +165,8 @@ Tools can be async! This is perfect for API calls, database queries, or any I/O 
 
 ```typescript
 const executor = new Worker()
-	.model(openai("gpt-4o-mini"))
-	.instructions("Execute the plan. Use tools when needed.")
+	.model(openai('gpt-4o-mini'))
+	.instructions('Execute the plan. Use tools when needed.')
 	.tools([greetingTool, calculatorTool, weatherTool]);
 ```
 
