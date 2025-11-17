@@ -9,23 +9,23 @@ Koiyo is a minimal TypeScript framework for building AI agents.
 
 ```bash
 # Using Bun (recommended)
-bun add @koiyo/core @koiyo/models
+bun add @koiyo/core
 
 # Using npm
-npm install @koiyo/core @koiyo/models
+npm install @koiyo/core
 
 # Using pnpm
-pnpm add @koiyo/core @koiyo/models
+pnpm add @koiyo/core
 
 # Using yarn
-yarn add @koiyo/core @koiyo/models
+yarn add @koiyo/core
 ```
 
 ## Quick Start
 
 ```typescript
 import { Agent, Worker } from '@koiyo/core';
-import { openai } from '@koiyo/models';
+import { openai } from '@ai-sdk/openai';
 
 const app = new Agent([
 	new Worker()
@@ -36,7 +36,8 @@ const app = new Agent([
 		.instructions('Execute the plan. Keep responses brief.'),
 ]);
 
-console.log(await app.generate('Say hello in one sentence.'));
+const response = await app.generate('Say hello in one sentence.');
+console.log(response);
 ```
 
 ## Contributing
